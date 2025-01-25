@@ -9,7 +9,16 @@ dotenv.config({
 });
 
 // APPROACH 2: TAKE A SEPARATE FILE DB WRITE CODE THERE AND JUST IMPORT IT IN MAIN FILE
-connectDB();
+connectDB()
+  .then(() => {
+    // after connecting to database, we will start the server
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running at port : ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("MONGODB connection FAILED !!!", err);
+  });
 
 // APPROACH 1: TO CONNECT TO DATABASE BY AN IFFE OR CALLING A SIMPLE CONNECTDB() FUNCTION
 /*
