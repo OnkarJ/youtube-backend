@@ -3,6 +3,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  refreshAccessToken,
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -29,5 +30,6 @@ router.route("/login").post(loginUser);
 // secured routes
 // post will go to verifyJWT as per it is the first handler, but in that method, once it is completed "next()" will help to tell to move to next handler that is logoutUser
 router.route("/logout").post(verifyJWT, logoutUser);
+router.route("/refresh-token").post(refreshAccessToken);
 
 export default router;
